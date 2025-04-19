@@ -20,12 +20,11 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-// Variables globales para la base de datos
 let db;
 const DB_NAME = "EscuelaDB";
-const DB_VERSION = 1;
+const DB_VERSION = 2;
 
-// Inicializar la base de datos al cargar la página
+
 document.addEventListener('DOMContentLoaded', function() {
     initDB();
     
@@ -40,6 +39,13 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('estudiantesModal').addEventListener('shown.bs.modal', cargarEstudiantes);
     document.getElementById('materiasModal').addEventListener('shown.bs.modal', cargarMaterias);
     document.getElementById('cursosModal').addEventListener('shown.bs.modal', cargarCursos);
+
+    // Configurar el evento del formulario (en DOMContentLoaded)
+document.getElementById('asignacionForm').addEventListener('submit', guardarAsignacion);
+document.getElementById('asignacionesModal').addEventListener('shown.bs.modal', function() {
+    cargarAsignaciones();
+    cargarSelectsParaAsignaciones();
+});
 });
 
 // Inicializar la base de datos
@@ -76,6 +82,10 @@ function initDB() {
         cursosStore.createIndex("grado_paralelo", ["grado", "paralelo"], { unique: true });
         
         console.log("Estructura de la base de datos creada");
+
+        // Crear object store para Asignaciones
+    const asignacionesStore = db.createObjectStore("asignaciones", { keyPath: "id", autoIncrement: true });
+    asignacionesStore.createIndex("docente_materia_curso", ["docenteId", "materiaId", "cursoId"], { unique: true });
     };
 }
 
@@ -377,7 +387,7 @@ function limpiarFormMateria() {
     document.getElementById('materiaId').value = '';
 }
 
-// Funciones CRUD para Cursos
+
 function guardarCurso(e) {
     e.preventDefault();
     
@@ -468,4 +478,261 @@ function eliminarCurso(id) {
 function limpiarFormCurso() {
     document.getElementById('cursoForm').reset();
     document.getElementById('cursoId').value = '';
+}
+
+
+
+function cargarSelectsParaAsignaciones() {
+    cargarDocentesParaSelect();
+    cargarMateriasParaSelect();
+    cargarCursosParaSelect();
+}
+
+function cargarDocentesParaSelect() {
+    const select = document.getElementById('asignacionDocente');
+    select.innerHTML = '<option value="">Seleccione un docente</option>';
+    
+    const transaction = db.transaction(["docentes"], "readonly");
+    const store = transaction.objectStore("docentes");
+    const request = store.getAll();
+    
+    request.onsuccess = function() {
+        request.result.forEach(docente => {
+            const option = document.createElement('option');
+            option.value = docente.id;
+            option.textContent = `${docente.nombres} ${docente.paterno} ${docente.materno}`;
+            select.appendChild(option);
+        });
+    };
+}
+
+function cargarMateriasParaSelect() {
+    const select = document.getElementById('asignacionMateria');
+    select.innerHTML = '<option value="">Seleccione una materia</option>';
+    
+    const transaction = db.transaction(["materias"], "readonly");
+    const store = transaction.objectStore("materias");
+    const request = store.getAll();
+    
+    request.onsuccess = function() {
+        request.result.forEach(materia => {
+            const option = document.createElement('option');
+            option.value = materia.id;
+            option.textContent = materia.nombre;
+            select.appendChild(option);
+        });
+    };
+}
+
+function cargarCursosParaSelect() {
+    const select = document.getElementById('asignacionCurso');
+    select.innerHTML = '<option value="">Seleccione un curso</option>';
+    
+    const transaction = db.transaction(["cursos"], "readonly");
+    const store = transaction.objectStore("cursos");
+    const request = store.getAll();
+    
+    request.onsuccess = function() {
+        request.result.forEach(curso => {
+            const option = document.createElement('option');
+            option.value = curso.id;
+            option.textContent = `${curso.nivel} ${curso.grado}° "${curso.paralelo}" (${curso.turno})`;
+            select.appendChild(option);
+        });
+    };
+}
+
+
+function guardarAsignacion(e) {
+    e.preventDefault();
+    
+    const asignacion = {
+        docenteId: parseInt(document.getElementById('asignacionDocente').value),
+        materiaId: parseInt(document.getElementById('asignacionMateria').value),
+        cursoId: parseInt(document.getElementById('asignacionCurso').value),
+        periodo: document.getElementById('asignacionPeriodo').value,
+        fechaRegistro: new Date().toISOString()
+    };
+    
+    const id = document.getElementById('asignacionId').value;
+    const transaction = db.transaction(["asignaciones"], "readwrite");
+    const store = transaction.objectStore("asignaciones");
+    
+    if (id) {
+        asignacion.id = parseInt(id);
+        const request = store.put(asignacion);
+        
+        request.onsuccess = function() {
+            cargarAsignaciones();
+            limpiarFormAsignacion();
+        };
+    } else {
+        const request = store.add(asignacion);
+        
+        request.onsuccess = function() {
+            cargarAsignaciones();
+            limpiarFormAsignacion();
+        };
+    }
+}
+
+function cargarAsignaciones() {
+    const transaction = db.transaction(["asignaciones"], "readonly");
+    const store = transaction.objectStore("asignaciones");
+    const request = store.getAll();
+    
+    request.onsuccess = function() {
+        const asignaciones = request.result;
+        const tbody = document.getElementById('asignacionesTableBody');
+        tbody.innerHTML = '';
+        
+        if (asignaciones.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="5" class="text-center">No hay asignaciones registradas</td></tr>';
+            return;
+        }
+        
+        
+        Promise.all([
+            obtenerNombresDocentes(asignaciones),
+            obtenerNombresMaterias(asignaciones),
+            obtenerNombresCursos(asignaciones)
+        ]).then(([docentesMap, materiasMap, cursosMap]) => {
+            asignaciones.forEach(asignacion => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${docentesMap.get(asignacion.docenteId) || 'Desconocido'}</td>
+                    <td>${materiasMap.get(asignacion.materiaId) || 'Desconocida'}</td>
+                    <td>${cursosMap.get(asignacion.cursoId) || 'Desconocido'}</td>
+                    <td>${asignacion.periodo}</td>
+                    <td class="action-buttons">
+                        <button class="btn btn-sm btn-warning" onclick="editarAsignacion(${asignacion.id})">Editar</button>
+                        <button class="btn btn-sm btn-danger" onclick="eliminarAsignacion(${asignacion.id})">Eliminar</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        });
+    };
+}
+
+
+function obtenerNombresDocentes(asignaciones) {
+    return new Promise((resolve) => {
+        const docentesIds = [...new Set(asignaciones.map(a => a.docenteId))];
+        const docentesMap = new Map();
+        
+        if (docentesIds.length === 0) {
+            resolve(docentesMap);
+            return;
+        }
+        
+        const transaction = db.transaction(["docentes"], "readonly");
+        const store = transaction.objectStore("docentes");
+        
+        docentesIds.forEach(id => {
+            const request = store.get(id);
+            request.onsuccess = function() {
+                const docente = request.result;
+                if (docente) {
+                    docentesMap.set(id, `${docente.nombres} ${docente.paterno} ${docente.materno}`);
+                }
+                
+                // Verificar si hemos terminado
+                if (docentesMap.size === docentesIds.length) {
+                    resolve(docentesMap);
+                }
+            };
+        });
+    });
+}
+
+function obtenerNombresMaterias(asignaciones) {
+    return new Promise((resolve) => {
+        const materiasIds = [...new Set(asignaciones.map(a => a.materiaId))];
+        const materiasMap = new Map();
+        
+        if (materiasIds.length === 0) {
+            resolve(materiasMap);
+            return;
+        }
+        
+        const transaction = db.transaction(["materias"], "readonly");
+        const store = transaction.objectStore("materias");
+        
+        materiasIds.forEach(id => {
+            const request = store.get(id);
+            request.onsuccess = function() {
+                const materia = request.result;
+                if (materia) {
+                    materiasMap.set(id, materia.nombre);
+                }
+                
+                if (materiasMap.size === materiasIds.length) {
+                    resolve(materiasMap);
+                }
+            };
+        });
+    });
+}
+
+function obtenerNombresCursos(asignaciones) {
+    return new Promise((resolve) => {
+        const cursosIds = [...new Set(asignaciones.map(a => a.cursoId))];
+        const cursosMap = new Map();
+        
+        if (cursosIds.length === 0) {
+            resolve(cursosMap);
+            return;
+        }
+        
+        const transaction = db.transaction(["cursos"], "readonly");
+        const store = transaction.objectStore("cursos");
+        
+        cursosIds.forEach(id => {
+            const request = store.get(id);
+            request.onsuccess = function() {
+                const curso = request.result;
+                if (curso) {
+                    cursosMap.set(id, `${curso.nivel} ${curso.grado}° "${curso.paralelo}" (${curso.turno})`);
+                }
+                
+                if (cursosMap.size === cursosIds.length) {
+                    resolve(cursosMap);
+                }
+            };
+        });
+    });
+}
+
+function editarAsignacion(id) {
+    const transaction = db.transaction(["asignaciones"], "readonly");
+    const store = transaction.objectStore("asignaciones");
+    const request = store.get(id);
+    
+    request.onsuccess = function() {
+        const asignacion = request.result;
+        
+        document.getElementById('asignacionId').value = asignacion.id;
+        document.getElementById('asignacionDocente').value = asignacion.docenteId;
+        document.getElementById('asignacionMateria').value = asignacion.materiaId;
+        document.getElementById('asignacionCurso').value = asignacion.cursoId;
+        document.getElementById('asignacionPeriodo').value = asignacion.periodo;
+    };
+}
+
+function eliminarAsignacion(id) {
+    if (confirm('¿Está seguro de eliminar esta asignación?')) {
+        const transaction = db.transaction(["asignaciones"], "readwrite");
+        const store = transaction.objectStore("asignaciones");
+        const request = store.delete(id);
+        
+        request.onsuccess = function() {
+            cargarAsignaciones();
+        };
+    }
+}
+
+function limpiarFormAsignacion() {
+    document.getElementById('asignacionForm').reset();
+    document.getElementById('asignacionId').value = '';
 }

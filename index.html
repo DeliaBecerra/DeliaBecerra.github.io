@@ -24,6 +24,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
+
                     <li class="nav-item">
                         <button class="nav-link px-2 px-lg-3 py-2 rounded btn btn-link w-100 text-start">
                             Boton
@@ -97,6 +98,11 @@
                 <li class="nav-item">
                     <button class="px-3 py-2 rounded btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#cursosModal">
                         Cursos
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="px-3 py-2 rounded btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#asignacionesModal">
+                        Asignaciones
                     </button>
                 </li>
             </ul>
@@ -262,7 +268,72 @@
             </div>
         </div>
     </div>
-
+<!-- Modal Asignaciones -->
+<div class="modal fade" id="asignacionesModal" tabindex="-1" aria-labelledby="asignacionesModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="asignacionesModalLabel">CRUD Asignaciones</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row mb-4">
+                    <div class="col-12 col-md-6 mb-4 mb-md-0">
+                        <h5>Agregar/Editar Asignación</h5>
+                        <form id="asignacionForm">
+                            <input type="hidden" id="asignacionId">
+                            <div class="form-group">
+                                <label for="asignacionDocente" class="form-label">Docente</label>
+                                <select class="form-control" id="asignacionDocente" required>
+                                    <!-- Se llenará con JavaScript -->
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="asignacionMateria" class="form-label">Materia</label>
+                                <select class="form-control" id="asignacionMateria" required>
+                                    <!-- Se llenará con JavaScript -->
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="asignacionCurso" class="form-label">Curso</label>
+                                <select class="form-control" id="asignacionCurso" required>
+                                    <!-- Se llenará con JavaScript -->
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="asignacionPeriodo" class="form-label">Período</label>
+                                <input type="text" class="form-control" id="asignacionPeriodo" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            <button type="button" class="btn btn-secondary" onclick="limpiarFormAsignacion()">Limpiar</button>
+                        </form>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <h5>Lista de Asignaciones</h5>
+                        <div class="table-responsive">
+                            <table class="crud-table">
+                                <thead>
+                                    <tr>
+                                        <th>Docente</th>
+                                        <th>Materia</th>
+                                        <th>Curso</th>
+                                        <th>Período</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="asignacionesTableBody">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
 
      <!-- Modal Docentes -->
      <div class="modal fade" id="docentesModal" tabindex="-1" aria-labelledby="docentesModalLabel" aria-hidden="true">
