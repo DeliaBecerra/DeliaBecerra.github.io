@@ -1,184 +1,590 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Delizia</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Sistema</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome para íconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+    <link rel="stylesheet" href="estyles.css">
 </head>
 <body>
-    <header>
-        <div class="nav">
-            <div>
-                <img src="img/logo.png" alt="">
-            </div>
-            <div>
-                <ul>
-                    <li>Boton</li>
-                    <li>Boton</li>
-                    <li>Boton</li>
-                    <li>Boton</li>
-                    <li>Boton</li>
+    <!-- Navbar -->
+     <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="img/logo.png" alt="Delizia Logo" class="img-fluid">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <button class="nav-link px-2 px-lg-3 py-2 rounded btn btn-link w-100 text-start">
+                            Boton
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link px-2 px-lg-3 py-2 rounded btn btn-link w-100 text-start">
+                            Boton
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link px-2 px-lg-3 py-2 rounded btn btn-link w-100 text-start">
+                            Boton
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link px-2 px-lg-3 py-2 rounded btn btn-link w-100 text-start">
+                            Boton
+                        </button>
+                    </li>
                 </ul>
             </div>
         </div>
-    </header>
-    <main>
-        <div class="banner">
-            <div>
-                <h1>PAGINA PRINCIPAL</h1>
+    </nav>
+
+    <!-- Banner -->
+<section class="banner-section py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-12 col-md-6 text-center text-md-start mb-4 mb-md-0">
+                <h1 class="display-4 fw-bold">Unidad Educativa San Gabriel</h1>
             </div>
-            <div class="banner-img">
-                <img src="img/banner.jpg" alt="">
-                <section>
-                    <button>Boton</button>
-                    <button>Boton</button>
-                    <button>Boton</button>
-                </section>
+            <div class="col-12 col-md-6 position-relative">
+                <img src="img/banner.jpg" alt="Banner" class="img-fluid rounded shadow w-100">
+                <div class="banner-buttons d-none d-md-flex flex-column gap-3">
+                    <!-- Botones solo en desktop -->
+                    <button class="btn btn-primary">Boton 1</button>
+                    <button class="btn btn-primary">Boton 2</button>
+                    <button class="btn btn-primary">Boton 3</button>
+                </div>
+                <div class="banner-buttons-mobile d-flex gap-3 justify-content-center mt-3 d-md-none">
+                    <!-- Botones para móvil -->
+                    <button class="btn btn-primary btn-sm">Boton 1</button>
+                    <button class="btn btn-primary btn-sm">Boton 2</button>
+                    <button class="btn btn-primary btn-sm">Boton 3</button>
+                </div>
             </div>
         </div>
-        <div class="main-menu">
-            <ul>
-                <li>Boton</li>
-                <li>Boton</li>
-                <li>Boton</li>
-                <li>Boton</li>
-                <li>Boton</li>
+    </div>
+</section>
+
+    <!-- Main Menu -->
+    <section class="border-top border-bottom py-3 bg-white">
+        <div class="container">
+            <ul class="nav justify-content-evenly flex-wrap">
+                <li class="nav-item">
+                    <button class="px-3 py-2 rounded btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#docentesModal">
+                        Docentes
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="px-3 py-2 rounded btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#estudiantesModal">
+                        Estudiantes
+                    </button>    
+                </li>
+                <li class="nav-item">
+                    <button class="px-3 py-2 rounded btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#materiasModal">
+                        Materias
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="px-3 py-2 rounded btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#cursosModal">
+                        Cursos
+                    </button>
+                </li>
             </ul>
         </div>
-        <div class="informacion">
-            <div>
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Neque fuga sed ex hic dignissimos itaque illo, quis similique aut sit, quam dolor? Quidem sed sit quaerat itaque. Molestiae, esse sapiente.</p>
-            </div>
-            <div>
-                <img src="img/delicia.jpg" alt="">
-            </div>
-        </div>
-        <div class="numeros">
-            <div class="titulo-numeros">
-                <h2>Numeros</h2>
-                <button>Boton</button>
-            </div>
-            <div class="numeros-contenido">
-                <div>
-                    <section class="numeros-elementos">
-                        <h2>01</h2>
-                        <p class="barra">80%</p>
-                        <label>Servicio</label>
-                    </section>
-                    <section class="numeros-elementos">
-                        <h2>01</h2>
-                        <p class="barra">80%</p>
-                        <label>Servicio</label>
-                    </section>
-                    <section class="numeros-elementos">
-                        <h2>01</h2>
-                        <p class="barra">80%</p>
-                        <label>Servicio</label>
-                    </section>
+    </section>
+
+    <!-- Información -->
+    <section class="py-5 my-4 bg-white shadow-sm rounded">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <p class="lead">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Neque fuga sed ex hic dignissimos itaque illo, quis similique aut sit, quam dolor? Quidem sed sit quaerat itaque. Molestiae, esse sapiente.</p>
                 </div>
-                <div>
-                    <section class="numeros-elementos">
-                        <h2>01</h2>
-                        <p class="barra">80%</p>
-                        <label>Servicio</label>
-                    </section>
-                    <section class="numeros-elementos">
-                        <h2>01</h2>
-                        <p class="barra">80%</p>
-                        <label>Servicio</label>
-                    </section>
-                    <section class="numeros-elementos">
-                        <h2>01</h2>
-                        <p class="barra">80%</p>
-                        <label>Servicio</label>
-                    </section>
+                <div class="col-lg-6 text-center">
+                    <img src="img/escuela2.jpg" alt="Delicia" class="img-fluid rounded shadow" >
                 </div>
             </div>
         </div>
-        <div class="secciones">
-            <h2>Secciones</h2>
-            <div class="secciones-menu">
-                <ul>
-                    <li>Boton</li>
-                    <li>Boton</li>
-                    <li>Boton</li>
-                    <li>Boton</li>
-                    <li>Boton</li>
-                </ul>
+    </section>
+
+    <!-- Números/Estadísticas -->
+    <section class="stats-section py-5 my-4 rounded">
+        <div class="container">
+            <div class="d-flex flex-wrap justify-content-between align-items-center mb-5">
+                <h2 class="display-5 text-white mb-3 mb-md-0">Numeros</h2>
+                <button class="btn btn-danger">Boton</button>
             </div>
             
-<div class="secciones-elementos">
-    <div class="elemento">
-        <img src="img/OREO.jpg" alt="">
-        <h2>Seccion</h2>
-        <button class="modal-btn" data-modal="modal1">Abrir Modal 1</button>
-    </div>
-    <div class="elemento">
-        <img src="img/FRUTILLA 1.jpg" alt="">
-        <h2>Seccion</h2>
-        <button class="modal-btn" data-modal="modal2">Abrir Modal 2</button>
-    </div>
-    <div class="elemento">
-        <img src="img/CHIRIMOYA.jpg" alt="">
-        <h2>Seccion</h2>
-        <button class="modal-btn" data-modal="modal3">Abrir Modal 3</button>
-    </div>
-</div>
-
-<div class="modal" id="modal1">
-    <div class="modal-content">
-        <span class="close-modal">&times;</span>
-        <h2>Contenido del Modal 1</h2>
-        <p>Este es el contenido del primer modal. Puedes agregar aquí cualquier información relevante.</p>
-        <img src="img/OREO 1.jpeg.jpg" alt="Imagen modal" style="width:100%; max-width:300px; margin:15px auto; display:block;">
-    </div>
-</div>
-
-<div class="modal" id="modal2">
-    <div class="modal-content">
-        <span class="close-modal">&times;</span>
-        <h2>Contenido del Modal 2</h2>
-        <p>Este es el contenido del segundo modal. Aquí puedes incluir formularios, imágenes o cualquier otro elemento.</p>
-        <div style="background:#f1c40f; padding:20px; border-radius:5px; margin-top:15px;">
-            <p>¡Este es un contenido destacado dentro del modal!</p>
-        </div>
-    </div>
-</div>
-
-<div class="modal" id="modal3">
-    <div class="modal-content">
-        <span class="close-modal">&times;</span>
-        <h2>Contenido del Modal 3</h2>
-        <p>Este es el contenido del tercer modal. Perfecto para mostrar información adicional o confirmaciones.</p>
-        <button class="modal-action-btn">Aceptar</button>
-        <button class="modal-action-btn" style="background:#e74c3c;">Cancelar</button>
-    </div>
-</div>
-        </div>
-    </main>
-    <footer>
-        <h2>FOOTER</h2>
-        <div>
-            <input type="text">
-            <button>Search</button>
-        </div>
-        <div class="footer">
-            <div>
-                <h2>footer</h2>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Obcaecati optio ad maiores corporis earum impedit!</p>
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="stat-item p-4 rounded text-center">
+                        <h2 class="stat-number">01</h2>
+                        <div class="progress my-3 mx-auto" style="width: 80%; height: 10px;">
+                            <div class="progress-bar" style="width: 80%;"></div>
+                        </div>
+                        <label class="fs-5">Servicio</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="stat-item p-4 rounded text-center">
+                        <h2 class="stat-number">01</h2>
+                        <div class="progress my-3 mx-auto" style="width: 80%; height: 10px;">
+                            <div class="progress-bar" style="width: 80%;"></div>
+                        </div>
+                        <label class="fs-5">Servicio</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="stat-item p-4 rounded text-center">
+                        <h2 class="stat-number">01</h2>
+                        <div class="progress my-3 mx-auto" style="width: 80%; height: 10px;">
+                            <div class="progress-bar" style="width: 80%;"></div>
+                        </div>
+                        <label class="fs-5">Servicio</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="stat-item p-4 rounded text-center">
+                        <h2 class="stat-number">01</h2>
+                        <div class="progress my-3 mx-auto" style="width: 80%; height: 10px;">
+                            <div class="progress-bar" style="width: 80%;"></div>
+                        </div>
+                        <label class="fs-5">Servicio</label>
+                    </div>
+                </div>
             </div>
-            <div>
-                <h2>footer</h2>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Obcaecati optio ad maiores corporis earum impedit!</p>
+        </div>
+    </section>
+
+    <!-- Secciones/Productos -->
+    <section class="py-5 my-4 bg-white shadow-sm rounded">
+        <div class="container">
+            <h2 class="text-center display-5 mb-5">Secciones</h2>
+            
+            <ul class="nav justify-content-center flex-wrap mb-5">
+                <li class="nav-item"><a class="nav-link px-3 py-2 rounded" href="#">Boton</a></li>
+                <li class="nav-item"><a class="nav-link px-3 py-2 rounded" href="#">Boton</a></li>
+                <li class="nav-item"><a class="nav-link px-3 py-2 rounded" href="#">Boton</a></li>
+                <li class="nav-item"><a class="nav-link px-3 py-2 rounded" href="#">Boton</a></li>
+                <li class="nav-item"><a class="nav-link px-3 py-2 rounded" href="#">Boton</a></li>
+            </ul>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="product-card p-4 text-center shadow-sm rounded">
+                        <img src="img/escuela1.jpg" alt="Producto" class="product-img">
+                        <h3>Seccion</h3>
+                        <button class="btn btn-purple mt-3" data-bs-toggle="modal" data-bs-target="#modal1">Abrir Modal 1</button>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="product-card p-4 text-center shadow-sm rounded">
+                        <img src="img/escuela2.jpg" alt="Producto" class="product-img">
+                        <h3>Seccion</h3>
+                        <button class="btn btn-purple mt-3" data-bs-toggle="modal" data-bs-target="#modal2">Abrir Modal 2</button>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="product-card p-4 text-center shadow-sm rounded">
+                        <img src="img/escuela3.jpg" alt="Producto" class="product-img">
+                        <h3>Seccion</h3>
+                        <button class="btn btn-purple mt-3" data-bs-toggle="modal" data-bs-target="#modal3">Abrir Modal 3</button>
+                    </div>
+                </div>
             </div>
-            <div class="ico">
-                <img src="img/facebook.png" alt="">
-                <img src="img/whatsapp.png" alt="">
-                <img src="img/twitter.png" alt="">
+        </div>
+    </section>
+
+    <!-- Modales -->
+    <div class="modal fade" id="modal1" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Contenido del Modal 1</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Este es el contenido del primer modal. Puedes agregar aquí cualquier información relevante.</p>
+                    <img src="img/escuela1.jpg" alt="Imagen modal" class="img-fluid rounded my-3">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal2" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Contenido del Modal 2</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Este es el contenido del segundo modal. Aquí puedes incluir formularios, imágenes o cualquier otro elemento.</p>
+                    <div class="bg-warning p-4 rounded my-3">
+                        <p class="mb-0">¡Este es un contenido destacado dentro del modal!</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal3" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Contenido del Modal 3</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Este es el contenido del tercer modal. Perfecto para mostrar información adicional o confirmaciones.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success">Aceptar</button>
+                    <button type="button" class="btn btn-danger">Cancelar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+     <!-- Modal Docentes -->
+     <div class="modal fade" id="docentesModal" tabindex="-1" aria-labelledby="docentesModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="docentesModalLabel">CRUD Docentes</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-4">
+                        <div class="col-12 col-md-6 mb-4 mb-md-0">
+                            <h5>Agregar/Editar Docente</h5>
+                            <form id="docenteForm">
+                                <input type="hidden" id="docenteId">
+                                <div class="form-group">
+                                    <label for="docenteCarnet" class="form-label">Carnet</label>
+                                    <input type="text" class="form-control" id="docenteCarnet" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="docentePaterno" class="form-label">Apellido Paterno</label>
+                                    <input type="text" class="form-control" id="docentePaterno" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="docenteMaterno" class="form-label">Apellido Materno</label>
+                                    <input type="text" class="form-control" id="docenteMaterno" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="docenteNombres" class="form-label">Nombres</label>
+                                    <input type="text" class="form-control" id="docenteNombres" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="docenteCargo" class="form-label">Cargo</label>
+                                    <input type="text" class="form-control" id="docenteCargo" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="docenteEstado" class="form-label">Estado</label>
+                                    <select class="form-control" id="docenteEstado" required>
+                                        <option value="Activo">Activo</option>
+                                        <option value="Inactivo">Inactivo</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="docenteObservacion" class="form-label">Observación</label>
+                                    <textarea class="form-control" id="docenteObservacion" rows="2"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                                <button type="button" class="btn btn-secondary" onclick="limpiarFormDocente()">Limpiar</button>
+                            </form>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <h5>Lista de Docentes</h5>
+                            <div class="table-responsive">
+                                <table class="crud-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Carnet</th>
+                                            <th>Apellido Paterno</th>
+                                            <th>Apellido Materno</th>
+                                            <th>Nombres</th>
+                                            <th>Cargo</th>
+                                            <th>Estado</th>
+                                            <th>Observación</th>
+                                            <th>Fecha Registro</th>
+                                            <th>Fecha Modificación</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="docentesTableBody">
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Estudiantes -->
+    <div class="modal fade" id="estudiantesModal" tabindex="-1" aria-labelledby="estudiantesModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="estudiantesModalLabel">CRUD Estudiantes</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <h5>Agregar/Editar Estudiante</h5>
+                            <form id="estudianteForm">
+                                <input type="hidden" id="estudianteId">
+                                <div class="form-group">
+                                    <label for="estudianteCodigoRude" class="form-label">Código RUDE</label>
+                                    <input type="text" class="form-control" id="estudianteCodigoRude" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="estudianteCarnet" class="form-label">Carnet</label>
+                                    <input type="text" class="form-control" id="estudianteCarnet" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="estudiantePaterno" class="form-label">Apellido Paterno</label>
+                                    <input type="text" class="form-control" id="estudiantePaterno" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="estudianteMaterno" class="form-label">Apellido Materno</label>
+                                    <input type="text" class="form-control" id="estudianteMaterno" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="estudianteNombres" class="form-label">Nombres</label>
+                                    <input type="text" class="form-control" id="estudianteNombres" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="estudianteFechaNacimiento" class="form-label">Fecha Nacimiento</label>
+                                    <input type="date" class="form-control" id="estudianteFechaNacimiento" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="estudianteEstadoMatricula" class="form-label">Estado Matrícula</label>
+                                    <select class="form-control" id="estudianteEstadoMatricula" required>
+                                        <option value="Activo">Activo</option>
+                                        <option value="Inactivo">Inactivo</option>
+                                        <option value="Egresado">Egresado</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="estudianteObsSegip" class="form-label">Observación SEGIP</label>
+                                    <textarea class="form-control" id="estudianteObsSegip" rows="2"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                                <button type="button" class="btn btn-secondary" onclick="limpiarFormEstudiante()">Limpiar</button>
+                            </form>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Lista de Estudiantes</h5>
+                            <div class="table-responsive">
+                                <table class="crud-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Código RUDE</th>
+                                            <th>Carnet</th>
+                                            <th>Apellido Paterno</th>
+                                            <th>Apellido Materno</th>
+                                            <th>Nombres</th>
+                                            <th>Fecha Nacimiento</th>
+                                            <th>Estado Matrícula</th>
+                                            <th>Observación SEGIP</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="estudiantesTableBody">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Materias -->
+    <div class="modal fade" id="materiasModal" tabindex="-1" aria-labelledby="materiasModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="materiasModalLabel">CRUD Materias</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <h5>Agregar/Editar Materia</h5>
+                            <form id="materiaForm">
+                                <input type="hidden" id="materiaId">
+                                <div class="form-group">
+                                    <label for="materiaNombre" class="form-label">Nombre Materia</label>
+                                    <input type="text" class="form-control" id="materiaNombre" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="materiaCodigo" class="form-label">Código Materia</label>
+                                    <input type="text" class="form-control" id="materiaCodigo" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                                <button type="button" class="btn btn-secondary" onclick="limpiarFormMateria()">Limpiar</button>
+                            </form>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Lista de Materias</h5>
+                            <div class="table-responsive">
+                                <table class="crud-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Código</th>
+                                            <th>Nombre</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="materiasTableBody">
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Cursos -->
+    <div class="modal fade" id="cursosModal" tabindex="-1" aria-labelledby="cursosModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cursosModalLabel">CRUD Cursos</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <h5>Agregar/Editar Curso</h5>
+                            <form id="cursoForm">
+                                <input type="hidden" id="cursoId">
+                                <div class="form-group">
+                                    <label for="cursoTurno" class="form-label">Turno</label>
+                                    <select class="form-control" id="cursoTurno" required>
+                                        <option value="Mañana">Mañana</option>
+                                        <option value="Tarde">Tarde</option>
+                                        <option value="Noche">Noche</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cursoNivel" class="form-label">Nivel</label>
+                                    <select class="form-control" id="cursoNivel" required>
+                                        <option value="Primaria">Primaria</option>
+                                        <option value="Secundaria">Secundaria</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cursoGrado" class="form-label">Grado</label>
+                                    <input type="number" class="form-control" id="cursoGrado" min="1" max="12" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cursoParalelo" class="form-label">Paralelo</label>
+                                    <input type="text" class="form-control" id="cursoParalelo" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                                <button type="button" class="btn btn-secondary" onclick="limpiarFormCurso()">Limpiar</button>
+                            </form>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Lista de Cursos</h5>
+                            <div class="table-responsive">
+                                <table class="crud-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Turno</th>
+                                            <th>Nivel</th>
+                                            <th>Grado</th>
+                                            <th>Paralelo</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="cursosTableBody">
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer class="py-5 mt-5">
+        <div class="container">
+            <h2 class="text-center mb-5">FOOTER</h2>
+            
+            <div class="d-flex justify-content-center mb-5">
+                <div class="input-group" style="max-width: 400px;">
+                    <input type="text" class="form-control" placeholder="Buscar...">
+                    <button class="btn btn-primary">Search</button>
+                </div>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-4 text-center text-md-start">
+                    <h3 class="text-warning mb-3">footer</h3>
+                    <p class="text-white-50">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Obcaecati optio ad maiores corporis earum impedit!</p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <h3 class="text-warning mb-3">footer</h3>
+                    <p class="text-white-50">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Obcaecati optio ad maiores corporis earum impedit!</p>
+                </div>
+                <div class="col-md-4 text-center text-md-end">
+                    <div class="d-flex justify-content-center justify-content-md-end gap-3">
+                        <img src="img/facebook.png" alt="Facebook" class="footer-icon">
+                        <img src="img/whatsapp.png" alt="WhatsApp" class="footer-icon">
+                        <img src="img/twitter.png" alt="Twitter" class="footer-icon">
+                    </div>
+                </div>
             </div>
         </div>
     </footer>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="main.js"></script>
 </body>
-<script src="main.js"></script>
 </html>
